@@ -1,0 +1,17 @@
+Metadata-Version: 1.0
+Name: fbimn.verteidigung
+Version: 1.0
+Summary: Content-Archetype for colloquium-events.
+Home-page: http://portal.imn.htwk-leipzig.de
+Author: Jakob Goepel
+Author-email: jgoepel at imn.htwk-leipzig de
+License: GPL
+Description: Verteidigungstermin-Contenttyp fuer IMN-Portal
+        
+Keywords: zope archetypes plone
+Platform: UNKNOWN
+Classifier: Framework :: Plone
+Classifier: Framework :: Zope2
+Classifier: Framework :: Zope3
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

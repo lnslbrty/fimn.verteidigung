@@ -1,0 +1,4 @@
+setuptools
+Products.Archetypes
+Products.ATContentTypes
+Products.validation
