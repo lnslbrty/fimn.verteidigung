@@ -92,9 +92,11 @@
                             </abbr>
                         </tal:differentday>
 
-                        <tal:sameday tal:condition="python:here.start().Date() == here.end().Date()"
-                                     tal:define="ampm python:site_properties.getProperty('localLongTimeFormat').find('%p') >= 0">
-                            <span tal:replace="python:toLocalizedTime(here.start())">
+                        <tal:sameday tal:condition="python:here.start().Date() == here.end().Date()">
+                            <tal:define="ampm site_properties context/portal_properties/site_properties;">
+                            <tal:define="ampm python:site_properties.getProperty('date_format_long').find('%p') >= 0">
+
+                            <span tal:replace="python:here.toLocalizedTime(here.start())">
                                 Start Date Time</span> <br />
                             <span i18n:translate="event_from">from</span>  
                             <abbr metal:define-macro="startdatesame-field-view"
@@ -163,13 +165,13 @@
                     <th i18n:translate="heading_add_to_calendar">Add event to calendar</th>
                     <td>
                         <a href="#"
-                           tal:attributes="href string:$here_url/vcs_view"
+                           tal:attributes="href string:${context/@@plone_context_state/object_url}/vcs_view"
                            title="Download this event in vCal format"
                            i18n:attributes="title title_add_to_vcal;">
                             <img tal:replace="structure here/icon_export_vcal.png" src="" alt="" />
                             <span i18n:translate="label_add_to_vcal">vCal</span></a><br />
                         <a href="#"
-                           tal:attributes="href string:$here_url/ics_view"
+                           tal:attributes="href string:${context/@@plone_context_state/object_url}/vcs_view"
                            title="Download this event in iCal format"
                            i18n:attributes="title title_add_to_ical;">
                             <img tal:replace="structure here/icon_export_ical.png" src="" alt="" />
@@ -212,7 +214,7 @@
 
         </div>
 
-        <div metal:use-macro="here/document_relateditems/macros/relatedItems">
+        <div class="relatedItems">
             show related items if they exist
         </div>
         
