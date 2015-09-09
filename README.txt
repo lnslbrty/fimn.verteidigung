@@ -17,6 +17,5 @@ Contributors
 
 * Bc. Sc. Jakob Goepel, 09MI-M, HTWK-Leipzig
 * jgoepel at imn htwk-leipzig de
-    
-  
+* toni.uhlig@stud.htwk-leipzig.de
 
