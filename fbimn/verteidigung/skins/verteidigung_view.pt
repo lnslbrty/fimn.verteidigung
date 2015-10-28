@@ -93,9 +93,6 @@
                         </tal:differentday>
 
                         <tal:sameday tal:condition="python:here.start().Date() == here.end().Date()">
-                            <tal:define="ampm site_properties context/portal_properties/site_properties;">
-                            <tal:define="ampm python:site_properties.getProperty('date_format_long').find('%p') >= 0">
-
                             <span tal:replace="python:here.toLocalizedTime(here.start())">
                                 Start Date Time</span> <br />
                             <span i18n:translate="event_from">from</span>  

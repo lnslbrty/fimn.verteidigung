@@ -33,6 +33,6 @@ def initialize(context):
         utils.ContentInit(kind,            
                           content_types      = (atype,),
                           permission         = config.ADD_CONTENT_PERMISSIONS[atype.portal_type],
-                          extra_constructors = (constructor,),            
+                          extra_constructors = (constructor,),
                           fti                = ftis,
                           ).initialize(context)
