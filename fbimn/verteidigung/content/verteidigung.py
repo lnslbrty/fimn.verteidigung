@@ -20,7 +20,7 @@
 
 
 """
-__author__  = 'modified ATEvent by Jakob Goepel <jgoepel@imn.htwk-leipzig.de>'
+__author__  = 'modified ATEvent by Jakob Goepel, Toni Uhlig <toni.uhlig@stud.htwk-leipzig.de>'
 __docformat__ = 'restructuredtext'
 
 # imports aus ATEvent-Mod (evtl. unnoetig/buggy)

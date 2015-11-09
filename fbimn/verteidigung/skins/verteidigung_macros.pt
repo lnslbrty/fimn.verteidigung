@@ -147,7 +147,7 @@
 </td>
 </tr>
 <tr>
-<td style="width:77px; white-space: nowrap;" valign="top" class="jahrgang">
+<td valign="top" class="jahrgang">
 <metal:fieldMacro use-macro="python:here.widget('graduateGroupYear', mode='edit')" />
 </td>
 <td valign="top"><b>&amp;&nbsp;</b></td>
@@ -173,18 +173,18 @@
 </td>
 </tr>
 <tr>
-<td style="white-space: nowrap">
+<td>
 <metal:fieldMacro use-macro="python:here.widget('graduateExpert1', mode='edit')" />
 </td>
-<td style="white-space: nowrap">
+<td>
 <metal:fieldMacro use-macro="python:here.widget('graduateExpert1Institution', mode='edit')" />
 </td>
 </tr>
 <tr>
-<td style="white-space: nowrap">
+<td>
 <metal:fieldMacro use-macro="python:here.widget('graduateExpert2', mode='edit')" />
 </td>
-<td style="white-space: nowrap">
+<td>
 <metal:fieldMacro use-macro="python:here.widget('graduateExpert2Institution', mode='edit')" />
 </td>
 </tr>

@@ -39,7 +39,6 @@ GRADUATE_GROUP_COURSES = DisplayList((
     ('IN', 'Informatik'),
     ('MI', 'Medien-Informatik'),
     ('AM', 'Angewandte Mathematik'),
-    ('WM', 'Wirtschaftsmathematik'),
     ))
 
 LOCATIONS = ['Z 417', 'Li 013', 'Li 106', 'Li 110', 'Li 112', 'Li 318', 'Z 530']
