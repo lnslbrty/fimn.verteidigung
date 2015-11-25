@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<portlets>
+
+ <!-- Portlet type registrations -->
+
+ <portlet
+   addview="fbimn.verteidigung.Portlet"
+   title="Verteidigungsportlet"
+   description="Das Portlet zum Verteidigungstool."
+   />
+
+</portlets>

@@ -1,0 +1,25 @@
+<dl class="portlet portletEvents">
+
+    <dt class="portletHeader" tal:define="header view/get_header" tal:content="header">
+    </dt>
+
+    <dd class="portletItem odd" tal:condition="view/termine" tal:define="portal_url here/portal_url" tal:repeat="termin view/termine">
+        <a class="tile" tal:define="event_url python:termin['event_url']" tal:attributes="href event_url">
+            <span tal:define="eventType python:termin['eventType']"
+                  tal:content="eventType"></span>
+            <span tal:define="graduateName python:termin['graduateName']"
+                  tal:content="graduateName"></span>
+        </a>
+        <span class="portletItemDetails">
+            <span tal:content="string:Raum: " />
+            <span tal:define="location python:termin['location']" tal:content="location"></span>
+            <br>
+            <span tal:content="string:Beginn: " />
+            <span tal:define="startDate python:termin['startDate']" tal:content="startDate"></span>
+        </span>
+    </dd>
+
+    <dd class="portletFooter">
+    </dd>
+
+</dl>

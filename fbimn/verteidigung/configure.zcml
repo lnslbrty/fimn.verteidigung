@@ -3,7 +3,10 @@
     xmlns:five="http://namespaces.zope.org/five"
     xmlns:cmf="http://namespaces.zope.org/cmf"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="fbimn.verteidigung" >
+
+   <include package="Products.CMFCore" />
 
    <!-- This package is a Zope 2 product -->
    <five:registerPackage package="." initialize=".initialize" />
@@ -23,5 +26,16 @@
       description="Extension profile for Verteidigungstermin"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
+
+    <plone:portlet
+        name="fbimn.verteidigung.Portlet"
+        interface=".portlet.IVerteidigungsportlet"
+        assignment=".portlet.Assignment"
+        view_permission="zope2.View"
+        edit_permission="cmf.ManagePortal"
+        renderer=".portlet.Renderer"
+        addview=".portlet.AddForm"
+        editview=".portlet.EditForm"
+        />
 
 </configure>

@@ -18,6 +18,7 @@ fbimn/verteidigung/__init__.py
 fbimn/verteidigung/config.py
 fbimn/verteidigung/configure.zcml
 fbimn/verteidigung/interfaces.py
+fbimn/verteidigung/portlet.py
 fbimn/verteidigung/content/__init__.py
 fbimn/verteidigung/content/verteidigung.py
 fbimn/verteidigung/profiles/default/browserlayer.xml

@@ -473,5 +473,26 @@ class Verteidigung(ATEvent):
         if not alreadySet:
             self.setEventType(v, alreadySet=True, **kw)
 
+    """ Methods implemented for Interface 'IVerteidigung' """
+    def hasEventRestriction(self):
+        eventRestriction = self.getField('eventRestriction').get(self)
+        if eventRestriction: return True
+        return False
+
+    def getTopic(self):
+        return str(self.getField('topic').get(self))
+
+    def getGraduateName(self):
+        return str(self.getField('graduateName').get(self))
+
+    def getEventType(self):
+        return str(self.getField('eventType').get(self))
+
+    def getDate(self):
+        return self.getField('startDate').get(self)
+
+    def getRoom(self):
+        return self.getField('location').get(self)
+
 # Content type registration for the Archetypes machinery
 atapi.registerType(Verteidigung, config.PROJECTNAME)
