@@ -32,7 +32,6 @@ DURATION = 70  # amount of MINUTES, this event will last by default...
 EVENT_TYPES = DisplayList((
     ('Bachelorverteidigung', 'Bachelorverteidigung'),
     ('Masterverteidigung', 'Masterverteidigung'),
-    ('Diplomverteidigung', 'Diplomverteidigung'),
     ))
 
 GRADUATE_GROUP_COURSES = DisplayList((
