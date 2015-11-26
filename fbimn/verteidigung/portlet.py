@@ -62,7 +62,7 @@ class Renderer(base.Renderer):
             if date:
                 termin['startDate'] = str(date.strftime("%d.%m.%y -  %H:%M"))
             else:
-                termin['startDate'] = "Unbekannt"
+                termin['startDate'] = u"Unbekannt"
 
             termin['graduateName'] = obj.getGraduateName()
 
@@ -71,7 +71,7 @@ class Renderer(base.Renderer):
                 degree = re.sub('[^A-Za-z0-9]+', '', degree)
                 termin['eventType'] = degree
             else:
-                termin['eventType'] = "Unbekannt"
+                termin['eventType'] = u"Unbekannt"
 
             termin['location'] = obj.getRoom()
             termin['event_url'] = brain.getURL()
