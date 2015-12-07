@@ -66,7 +66,60 @@ from fbimn.verteidigung import exampleMessageFactory as _
 
 ############################################################### schema definition ###
 
-schema = ATEventSchema.copy() + atapi.Schema((
+schema = ATEventSchema.copy()
+
+# only use AutocompleteWidget if it is installed^
+if acw_installed:
+        try:
+                schema['graduateGroupYear'].widget = AutocompleteWidget(
+                        visible = {'edit': 'visible', 'view': 'invisible'},
+                        size = 5,
+                        maxlength = 4,
+                        label = config.LABEL_GRADUATE_YEAR,
+                        actb_timeout = -1,
+                        actb_filter_bogus = False,
+                        actb_expand_onfocus = 1,
+                )
+                schema['location'].vocabulary = config.LOCATIONS
+                schema['location'].widget = AutocompleteWidget(
+                        actb_timeout=-1,actb_filter_bogus = False,actb_expand_onfocus=1)
+                schema['graduateExpert1'].vocabulary='experts_vocabulary'
+                schema['graduateExpert1'].widget = AutocompleteWidget(
+                        size = 38,
+                        description=config.DESCR_EXPERT1,
+                        label = config.LABEL_EXPERT1,
+                        actb_timeout=-1,
+                        actb_filter_bogus = False,
+                        actb_expand_onfocus = 0,
+                )
+                schema['graduateExpert2'].vocabulary='experts_vocabulary'
+                schema['graduateExpert2'].widget = AutocompleteWidget(
+                        size = 38,
+                        label = config.LABEL_EXPERT2,
+                        actb_timeout=-1,
+                        actb_filter_bogus = False,
+                        actb_expand_onfocus = 0,
+                )
+                schema['graduateExpert1Institution'].widget = AutocompleteWidget(
+                        size = 64,
+                        label = config.LABEL_INSTITUT1,
+                        actb_timeout = -1,
+                        actb_filter_bogus = False,
+                        actb_expand_onfocus=1
+                )
+                schema['graduateExpert2Institution'].widget = AutocompleteWidget(
+                        size = 64,
+                        label = config.LABEL_INSTITUT2,
+                        actb_timeout = -1,
+                        actb_filter_bogus = False,
+                        actb_expand_onfocus=1
+                )
+        except (AttributeError, KeyError):
+		acw_installed = False
+		pass
+
+if not acw_installed:
+	schema = ATEventSchema.copy() + atapi.Schema((
 
 	atapi.StringField('graduateName', 
 		languageIndependent=True,
@@ -209,76 +262,9 @@ schema = ATEventSchema.copy() + atapi.Schema((
 		),
 	),
 
-
-	#atapi.ReferenceField(
-    #    name='assistants',
-    #    widget=ReferenceBrowserWidget
-    #    (
-    #        label=u'Betreuerauswahl-Test',
-    #        i18n_domain='FacultyStaffDirectory',
-    #        allow_browse=1,
-    #        allow_search=1,
-    #        show_results_without_query=1,
-    #        restrict_browsing_to_startup_directory=False,
-    #        popup_width=800,
-    #        hide_inaccessible=True,
-    #    ),
-    #    write_permission = ChangeEvents,
-    #    multiValued=True,
-    #    relationship='relatesTo',
-    #    allowed_types=('FSDPerson','Document'),
-    #),
-
-))
+	))
 
 ############################################################# schema modifications ###
-
-# only use AutocompleteWidget if it is installed
-if acw_installed:
-	schema['graduateGroupYear'].widget = AutocompleteWidget(
-			visible = {'edit': 'visible', 'view': 'invisible'},
-			size = 5,
-			maxlength = 4,
-			label = config.LABEL_GRADUATE_YEAR,
-			actb_timeout = -1,
-			actb_filter_bogus = False,
-			actb_expand_onfocus = 1,
-		)
-	schema['location'].vocabulary = config.LOCATIONS
-	schema['location'].widget = AutocompleteWidget(
-			actb_timeout=-1,actb_filter_bogus = False,actb_expand_onfocus=1)
-	schema['graduateExpert1'].vocabulary='experts_vocabulary'
-	schema['graduateExpert1'].widget = AutocompleteWidget(
-			size = 38,
-			description=config.DESCR_EXPERT1,
-			label = config.LABEL_EXPERT1,
-			actb_timeout=-1,
-			actb_filter_bogus = False,
-			actb_expand_onfocus = 0,
-		)
-	schema['graduateExpert2'].vocabulary='experts_vocabulary'
-	schema['graduateExpert2'].widget = AutocompleteWidget(
-			size = 38,
-			label = config.LABEL_EXPERT2,
-			actb_timeout=-1,
-			actb_filter_bogus = False,
-			actb_expand_onfocus = 0,
-		)
-	schema['graduateExpert1Institution'].widget = AutocompleteWidget(
-			size = 64,
-			label = config.LABEL_INSTITUT1,
-			actb_timeout = -1,
-			actb_filter_bogus = False,
-			actb_expand_onfocus=1
-		)
-	schema['graduateExpert2Institution'].widget = AutocompleteWidget(
-			size = 64,
-			label = config.LABEL_INSTITUT2,
-			actb_timeout = -1,
-			actb_filter_bogus = False,
-			actb_expand_onfocus=1
-		)
-
 
 schema['startDate'].widget.label = config.LABEL_TIME
 schema['location'].widget.label = config.LABEL_LOCATION

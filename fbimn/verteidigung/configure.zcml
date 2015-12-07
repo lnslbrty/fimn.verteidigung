@@ -27,6 +27,8 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
+    <include package="plone.app.portlets" />
+
     <plone:portlet
         name="fbimn.verteidigung.Portlet"
         interface=".portlet.IVerteidigungsportlet"

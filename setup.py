@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '1.0b'
+version = '1.0b0'
 
 setup(name='fbimn.verteidigung',
       version=version,

@@ -6,7 +6,9 @@
  <portlet
    addview="fbimn.verteidigung.Portlet"
    title="Verteidigungsportlet"
-   description="Das Portlet zum Verteidigungstool."
-   />
+   description="Das Portlet zum Verteidigungstool.">
+   <for interface="plone.app.portlets.interfaces.IColumn" />
+   <for interface="plone.app.portlets.interfaces.IDashboard" />
+ </portlet>
 
 </portlets>
