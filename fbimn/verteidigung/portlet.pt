@@ -1,4 +1,5 @@
-<dl class="portlet portletEvents">
+<dl class="portlet portletEvents" tal:define="termine_anzahl view/termine_available"
+                                  tal:condition="python: termine_anzahl > 0">
 
     <dt class="portletHeader" tal:define="header view/get_header" tal:content="header">
     </dt>

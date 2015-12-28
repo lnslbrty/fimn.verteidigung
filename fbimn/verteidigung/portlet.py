@@ -40,9 +40,13 @@ class Assignment(base.Assignment):
 
 class Renderer(base.Renderer):
     render = ViewPageTemplateFile('portlet.pt')
+    termine_anzahl = 0
 
     def get_header(self):
-	return u"Verteidigungen"
+        return u"Verteidigungen"
+
+    def termine_available(self):
+	return self.termine_anzahl
 
     @memoize
     def _data(self):
@@ -77,6 +81,7 @@ class Renderer(base.Renderer):
             termin['event_url'] = brain.getURL()
             termine += [ termin ]
 
+	self.termine_anzahl = len(termine)
         return termine
 
     def update(self):
