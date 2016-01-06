@@ -40,11 +40,9 @@
             <tbody>
 
                 <tr>
-                    <th i18n:translate="event_what">What</th>
+                    <th i18n:translate="event_what">Was</th>
                     <td>
-                        <metal:field use-macro="python:here.widget('subject', mode='view')">
-                        Categories
-                        </metal:field>
+                        <span tal:define="evtype here/getEventType" tal:content="evtype">Verteidigungstyp</span>
                         <div tal:condition="here/getEventRestriction" style="color:red;">
                             <b>(nicht &#246;ffentlich)</b>
                         </div>
@@ -78,7 +76,7 @@
                                         tal:content="python:here.toLocalizedTime(here.start(),
                                         long_format=1)">Start Date Time</span>
                             </abbr>
-                            <span i18n:translate="event_to">to</span> <br />
+                            <span i18n:translate="event_to">bis</span> <br />
                             <abbr metal:define-macro="enddate-field-view"
                                   tal:define="kss_class python:getKssClasses('endDate',
                                               templateId=templateId, macro='enddate-field-view');"
@@ -95,7 +93,7 @@
                         <tal:sameday tal:condition="python:here.start().Date() == here.end().Date()">
                             <span tal:replace="python:here.toLocalizedTime(here.start())">
                                 Start Date Time</span> <br />
-                            <span i18n:translate="event_from">from</span>  
+                            <span i18n:translate="event_from">von</span>
                             <abbr metal:define-macro="startdatesame-field-view"
                                   tal:define="kss_class python:getKssClasses('startDate',
                                               templateId=templateId, macro='startdatesame-field-view');"
@@ -106,7 +104,7 @@
                                         class="explain"
                                         tal:content="python:here.toLocalizedTime(here.start(), time_only=1)">Start Time
                             </span></abbr>
-                            <span i18n:translate="event_to">to</span>
+                            <span i18n:translate="event_to">bis</span>
                             <abbr metal:define-macro="enddatesame-field-view"
                                   tal:define="kss_class python:getKssClasses('endDate',
                                               templateId=templateId, macro='enddatesame-field-view');"

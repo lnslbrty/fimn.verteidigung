@@ -472,7 +472,13 @@ class Verteidigung(ATEvent):
         return str(self.getField('graduateName').get(self))
 
     def getEventType(self):
-        return str(self.getField('eventType').get(self))
+        evtype = self.getField('eventType').get(self)
+        if type(evtype) is StringType:
+            return str(evtype)
+        elif evtype:
+            return str(evtype[0])
+        else:
+            return None
 
     def getDate(self):
         return self.getField('startDate').get(self)
