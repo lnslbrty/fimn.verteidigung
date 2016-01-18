@@ -42,7 +42,9 @@
                 <tr>
                     <th i18n:translate="event_what">Was</th>
                     <td>
-                        <span tal:define="evtype here/getEventType" tal:content="evtype">Verteidigungstyp</span>
+                        <span tal:define="evtype here/getEventType" tal:content="evtype">
+                        Categories
+                        </span>
                         <div tal:condition="here/getEventRestriction" style="color:red;">
                             <b>(nicht &#246;ffentlich)</b>
                         </div>
