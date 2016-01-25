@@ -10,6 +10,7 @@ from plone.memoize.instance import memoize
 from zope import schema
 from zope.formlib import form
 from zope.interface import implements
+from DateTime import DateTime
 import re
 
 # Product imports
@@ -50,9 +51,16 @@ class Renderer(base.Renderer):
 
     @memoize
     def _data(self):
-        """ get all 'Verteidigung' brains (storage entries) """
-        verteidigung_brains = self.context.portal_catalog(portal_type="Verteidigung", review_state="published")
-        count = self.data.anzahl;
+        """ get all (data.anzahl) 'Verteidigung' brains (storage entries) """
+        count = self.data.anzahl + 1;
+        start = DateTime()
+        end = start + 30
+        date_range_query = {'query': (start, end), 'range': 'min:max'}
+        verteidigung_brains = self.context.portal_catalog.queryCatalog({"portal_type"  : "Verteidigung",
+                                                                        "start"        : date_range_query,
+                                                                        "sort_on"      : "start",
+                                                                        "sort_limit"   : count,
+                                                                        "review_state" : "published"})
         termine = []
         for brain in verteidigung_brains:
             count -= 1
