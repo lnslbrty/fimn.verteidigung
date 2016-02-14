@@ -2,4 +2,6 @@
 <layers>  
   <layer name="fbimn.verteidigung"
          interface="fbimn.verteidigung.interfaces.IVerteidigungSpecific" />
+  <layer name="fbimn.views"
+         interface="fbimn.verteidigung.interfaces.IVerteidigungView" />
 </layers>

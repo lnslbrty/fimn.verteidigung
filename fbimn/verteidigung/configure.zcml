@@ -4,6 +4,7 @@
     xmlns:cmf="http://namespaces.zope.org/cmf"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="fbimn.verteidigung" >
 
    <include package="Products.CMFCore" />
@@ -27,17 +28,65 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
-    <include package="plone.app.portlets" />
+   <genericsetup:registerProfile
+      name="uninstall"
+      title="Uninstall fbimn.verteidigung"
+      directory="profiles/uninstall"
+      description=""
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
+      />
 
-    <plone:portlet
-        name="fbimn.verteidigung.Portlet"
-        interface=".portlet.IVerteidigungsportlet"
-        assignment=".portlet.Assignment"
-        view_permission="zope2.View"
-        edit_permission="cmf.ManagePortal"
-        renderer=".portlet.Renderer"
-        addview=".portlet.AddForm"
-        editview=".portlet.EditForm"
-        />
+   <include package="plone.app.portlets" />
+
+   <plone:portlet
+      name="fbimn.verteidigung.Portlet"
+      interface=".portlet.IVerteidigungsportlet"
+      assignment=".portlet.Assignment"
+      view_permission="zope2.View"
+      edit_permission="cmf.ManagePortal"
+      renderer=".portlet.Renderer"
+      addview=".portlet.AddForm"
+      editview=".portlet.EditForm"
+      />
+
+    <!-- Verteidigung View Methods -->
+    <browser:page
+        for="Products.ATContentTypes.interface.IATFolder"
+        name="verteidigung_listing"
+        class=".views.VerteidigungEventsView"
+        layer=".interfaces.IVerteidigungView"
+        template="skins/verteidigung_listing.pt"
+        permission="zope2.View"
+    />
+
+    <browser:page
+        for="Products.ATContentTypes.interface.IATTopic"
+        name="verteidigung_listing"
+        class=".views.VerteidigungEventsView"
+        layer=".interfaces.IVerteidigungView"
+        template="skins/verteidigung_listing.pt"
+        permission="zope2.View"
+    />
+
+    <include package="plone.app.contentmenu"/>
+
+    <browser:menuItem
+        for="Products.ATContentTypes.interface.IATFolder"
+        menu="plone_displayviews"
+        layer=".interfaces.IVerteidigungView"
+        title="Verteidigung View Listing"
+        action="@@verteidigung_listing"
+        description="A view of Verteidigung events"
+    />
+
+    <browser:menuItem
+        for="Products.ATContentTypes.interface.IATTopic"
+        menu="plone_displayviews"
+        layer=".interfaces.IVerteidigungView"
+        title="Verteidigung View Listing"
+        action="@@verteidigung_listing"
+        description="A view of Verteidigung events"
+    />
 
 </configure>
