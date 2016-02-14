@@ -40,7 +40,7 @@ class Assignment(base.Assignment):
 
 
 class Renderer(base.Renderer):
-    render = ViewPageTemplateFile('portlet.pt')
+    render = ViewPageTemplateFile('skins/portlet.pt')
     termine_anzahl = 0
 
     def get_header(self):
