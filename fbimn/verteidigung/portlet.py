@@ -26,13 +26,21 @@ class IVerteidigungsportlet(IPortletDataProvider):
              required=True,
              default=5,
              min=1)
+    mTage = schema.Int(
+            title=u"Tage in der Zukunft berücksichtigen",
+            description=u"Die Anzahl der Tage von in der Zukunft anzuzeigende Verteidigungen.",
+            required=True,
+            default=30,
+            min=1)
 
 class Assignment(base.Assignment):
     implements(IVerteidigungsportlet)
     anzahl = 5
+    mTage = 30
 
-    def __init__(self, anzahl=5):
+    def __init__(self, anzahl=5, mTage=30):
         self.anzahl = anzahl
+        self.mTage  = mTage
 
     @property
     def title(self):
@@ -52,9 +60,9 @@ class Renderer(base.Renderer):
     @memoize
     def _data(self):
         """ get all (data.anzahl) 'Verteidigung' brains (storage entries) """
-        count = self.data.anzahl + 1;
+        count = self.data.anzahl
         start = DateTime()
-        end = start + 30
+        end = start + self.data.mTage
         date_range_query = {'query': (start, end), 'range': 'min:max'}
         verteidigung_brains = self.context.portal_catalog.queryCatalog({"portal_type"  : "Verteidigung",
                                                                         "start"        : date_range_query,
@@ -63,10 +71,10 @@ class Renderer(base.Renderer):
                                                                         "review_state" : "published"})
         termine = []
         for brain in verteidigung_brains:
-            count -= 1
             if count <= 0: break
             obj = brain.getObject()
             if obj.hasEventRestriction(): continue
+            count -= 1
             termin = dict()
             termin['topic'] = obj.getTopic()
 
