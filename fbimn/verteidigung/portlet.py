@@ -71,7 +71,6 @@ class Renderer(base.Renderer):
         verteidigung_brains = self.context.portal_catalog.queryCatalog({"portal_type"  : "Verteidigung",
                                                                         "start"        : date_range_query,
                                                                         "sort_on"      : "start",
-                                                                        "sort_limit"   : count,
                                                                         "review_state" : "published"})
         termine = []
         for brain in verteidigung_brains:
