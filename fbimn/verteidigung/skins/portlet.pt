@@ -13,7 +13,8 @@
         </a>
         <span class="portletItemDetails">
             <span tal:content="string:Raum: " />
-            <span tal:define="location python:termin['location']" tal:content="location"></span>
+            <span tal:define="location python:termin['location']" tal:content="location" />
+            <span tal:condition="python:termin['restricted'] == 1" style="color:red;">(nicht &#246;ffentlich)</span>
             <br>
             <span tal:content="string:Beginn: " />
             <span tal:define="startDate python:termin['startDate']" tal:content="startDate"></span>

@@ -2,6 +2,7 @@
 from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from plone import api
 from plone.app.portlets.portlets import base
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.portlet.static import PloneMessageFactory as _
@@ -57,6 +58,9 @@ class Renderer(base.Renderer):
     def termine_available(self):
 	return self.termine_anzahl
 
+    def user_is_anon(self):
+        return api.user.is_anonymous()
+
     @memoize
     def _data(self):
         """ get all (data.anzahl) 'Verteidigung' brains (storage entries) """
@@ -73,9 +77,15 @@ class Renderer(base.Renderer):
         for brain in verteidigung_brains:
             if count <= 0: break
             obj = brain.getObject()
-            if obj.hasEventRestriction(): continue
+            if obj.hasEventRestriction() and self.user_is_anon():
+                continue
+
             count -= 1
             termin = dict()
+            if obj.hasEventRestriction():
+                termin['restricted'] = 1
+            else:
+                termin['restricted'] = 0
             termin['topic'] = obj.getTopic()
 
             date = obj.getDate()
@@ -98,6 +108,7 @@ class Renderer(base.Renderer):
             termine += [ termin ]
 
 	self.termine_anzahl = len(termine)
+
         return termine
 
     def update(self):
