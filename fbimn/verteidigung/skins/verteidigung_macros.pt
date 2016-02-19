@@ -162,7 +162,7 @@
 </table>
 
 <table border="0" style="margin:0;padding:0;">
-<tr>
+<tr tal:condition="python:here.acwInstalled() == True">
 <td colspan="2">
 <dl class="portalMessage info">
           <dt>Hinweis</dt>

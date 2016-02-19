@@ -26,7 +26,11 @@ class VerteidigungEventsView(BrowserView):
 
     @memoize
     def getData(self):
+        start = DateTime()
+        end = start + 30
+        date_range_query = {'query': (start, end), 'range': 'min:max'}
         verteidigung_brains = self.context.portal_catalog.queryCatalog({"portal_type"  : "Verteidigung",
+                                                                        "start"        : date_range_query,
                                                                         "sort_on"      : "start",
                                                                         "sort_order"   : "descending",
                                                                         "sort_limit"   : 10,

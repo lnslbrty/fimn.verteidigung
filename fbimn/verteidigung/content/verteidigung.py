@@ -66,59 +66,7 @@ from fbimn.verteidigung import exampleMessageFactory as _
 
 ############################################################### schema definition ###
 
-schema = ATEventSchema.copy()
-
-# only use AutocompleteWidget if it is installed^
-if acw_installed:
-        try:
-                schema['graduateGroupYear'].widget = AutocompleteWidget(
-                        visible = {'edit': 'visible', 'view': 'invisible'},
-                        size = 5,
-                        maxlength = 4,
-                        label = config.LABEL_GRADUATE_YEAR,
-                        actb_timeout = -1,
-                        actb_filter_bogus = False,
-                        actb_expand_onfocus = 1,
-                )
-                schema['location'].vocabulary = config.LOCATIONS
-                schema['location'].widget = AutocompleteWidget(
-                        actb_timeout=-1,actb_filter_bogus = False,actb_expand_onfocus=1)
-                schema['graduateExpert1'].vocabulary='experts_vocabulary'
-                schema['graduateExpert1'].widget = AutocompleteWidget(
-                        size = 38,
-                        description=config.DESCR_EXPERT1,
-                        label = config.LABEL_EXPERT1,
-                        actb_timeout=-1,
-                        actb_filter_bogus = False,
-                        actb_expand_onfocus = 0,
-                )
-                schema['graduateExpert2'].vocabulary='experts_vocabulary'
-                schema['graduateExpert2'].widget = AutocompleteWidget(
-                        size = 38,
-                        label = config.LABEL_EXPERT2,
-                        actb_timeout=-1,
-                        actb_filter_bogus = False,
-                        actb_expand_onfocus = 0,
-                )
-                schema['graduateExpert1Institution'].widget = AutocompleteWidget(
-                        size = 64,
-                        label = config.LABEL_INSTITUT1,
-                        actb_timeout = -1,
-                        actb_filter_bogus = False,
-                        actb_expand_onfocus=1
-                )
-                schema['graduateExpert2Institution'].widget = AutocompleteWidget(
-                        size = 64,
-                        label = config.LABEL_INSTITUT2,
-                        actb_timeout = -1,
-                        actb_filter_bogus = False,
-                        actb_expand_onfocus=1
-                )
-        except (AttributeError, KeyError):
-		acw_installed = False
-		pass
-
-if not acw_installed:
+if True:
 	schema = ATEventSchema.copy() + atapi.Schema((
 
 	atapi.StringField('graduateName', 
@@ -263,6 +211,55 @@ if not acw_installed:
 	),
 
 	))
+
+if acw_installed:
+        try:
+                schema['graduateGroupYear'].widget = AutocompleteWidget(
+                        visible = {'edit': 'visible', 'view': 'invisible'},
+                        size = 5,
+                        maxlength = 4,
+                        label = config.LABEL_GRADUATE_YEAR,
+                        actb_timeout = -1,
+                        actb_filter_bogus = False,
+                        actb_expand_onfocus = 1,
+                )
+                schema['location'].vocabulary = config.LOCATIONS
+                schema['location'].widget = AutocompleteWidget(
+                        actb_timeout=-1,actb_filter_bogus = False,actb_expand_onfocus=1)
+                schema['graduateExpert1'].vocabulary='experts_vocabulary'
+                schema['graduateExpert1'].widget = AutocompleteWidget(
+                        size = 38,
+                        description=config.DESCR_EXPERT1,
+                        label = config.LABEL_EXPERT1,
+                        actb_timeout=-1,
+                        actb_filter_bogus = False,
+                        actb_expand_onfocus = 0,
+                )
+                schema['graduateExpert2'].vocabulary='experts_vocabulary'
+                schema['graduateExpert2'].widget = AutocompleteWidget(
+                        size = 38,
+                        label = config.LABEL_EXPERT2,
+                        actb_timeout=-1,
+                        actb_filter_bogus = False,
+                        actb_expand_onfocus = 0,
+                )
+                schema['graduateExpert1Institution'].widget = AutocompleteWidget(
+                        size = 64,
+                        label = config.LABEL_INSTITUT1,
+                        actb_timeout = -1,
+                        actb_filter_bogus = False,
+                        actb_expand_onfocus=1
+                )
+                schema['graduateExpert2Institution'].widget = AutocompleteWidget(
+                        size = 64,
+                        label = config.LABEL_INSTITUT2,
+                        actb_timeout = -1,
+                        actb_filter_bogus = False,
+                        actb_expand_onfocus=1
+                )
+        except (AttributeError, KeyError):
+                acw_installed = False
+                pass
 
 ############################################################# schema modifications ###
 
@@ -485,6 +482,13 @@ class Verteidigung(ATEvent):
 
     def getRoom(self):
         return self.getField('location').get(self)
+
+    def acwInstalled(self):
+        try:
+            from Products.AutocompleteWidget.AutocompleteWidget import AutocompleteWidget
+            return True
+        except:
+            return False
 
 # Content type registration for the Archetypes machinery
 atapi.registerType(Verteidigung, config.PROJECTNAME)
