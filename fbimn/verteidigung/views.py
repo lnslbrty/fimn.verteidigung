@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 from plone import api
@@ -7,6 +8,7 @@ from zope import schema
 from zope.formlib import form
 from zope.interface import implements, Interface
 from DateTime import DateTime
+from Products.CMFPlone.utils import safe_unicode
 import re
 
 # Product imports
@@ -32,7 +34,7 @@ class VerteidigungEventsView(BrowserView):
         verteidigung_brains = self.context.portal_catalog.queryCatalog({"portal_type"  : "Verteidigung",
                                                                         "start"        : date_range_query,
                                                                         "sort_on"      : "start",
-                                                                        "sort_order"   : "descending",
+                                                                        "sort_order"   : "ascending",
                                                                         "sort_limit"   : 10,
                                                                         "review_state" : "published"})
         termine = []
@@ -40,7 +42,7 @@ class VerteidigungEventsView(BrowserView):
             obj = brain.getObject()
             if obj.hasEventRestriction() and self.user_is_anon(): continue
             termin = dict()
-            termin['topic'] = obj.getTopic()
+            termin['topic'] = safe_unicode(obj.getTopic())
 
             date = obj.getDate()
             if date:
@@ -52,9 +54,9 @@ class VerteidigungEventsView(BrowserView):
             if degree:
                 degree = re.sub('[^A-Za-z0-9]+', '', degree)
             else:
-                degree = ""
+                degree = ''
 
-            termin['title'] = degree + u' ' + obj.getGraduateName()
+            termin['title'] = degree + u' ' + safe_unicode(obj.getGraduateName())
             if obj.hasEventRestriction():
                 termin['title'] += u' (Sperrvermerk)'
             termin['location'] = obj.getRoom()
