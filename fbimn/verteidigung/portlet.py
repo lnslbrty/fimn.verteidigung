@@ -33,15 +33,22 @@ class IVerteidigungsportlet(IPortletDataProvider):
             required=True,
             default=30,
             min=1)
+    baseURL = schema.ASCIILine(
+              title=u"Basis URL für Verteidigungen",
+              description=u"Die URL auf die der Titel des Portlet Header verweist (inaktiv, wenn leeres Feld).",
+              required=False,
+              default='')
 
 class Assignment(base.Assignment):
     implements(IVerteidigungsportlet)
-    anzahl = 5
-    mTage = 30
+    anzahl = int(5)
+    mTage = int(30)
+    baseURL = str('')
 
-    def __init__(self, anzahl=5, mTage=30):
-        self.anzahl = anzahl
-        self.mTage  = mTage
+    def __init__(self, anzahl=5, mTage=30, baseURL=''):
+        self.anzahl  = int(anzahl)
+        self.mTage   = int(mTage)
+        self.baseURL = str(baseURL)
 
     @property
     def title(self):
@@ -52,8 +59,18 @@ class Renderer(base.Renderer):
     render = ViewPageTemplateFile('skins/portlet.pt')
     termine_anzahl = 0
 
+    @memoize
     def get_header(self):
         return u"Verteidigungen"
+
+    @memoize
+    def get_url(self):
+        url = self.data.baseURL
+        if url is None or len(url) == 0:
+            return None
+        if url[0] != u'/':
+            url = u'/' + url[0:]
+        return url
 
     def termine_available(self):
 	return self.termine_anzahl

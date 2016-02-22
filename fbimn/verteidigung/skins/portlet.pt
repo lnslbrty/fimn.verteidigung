@@ -1,7 +1,17 @@
 <dl class="portlet portletEvents" tal:define="termine_anzahl view/termine_available"
                                   tal:condition="python: termine_anzahl > 0">
 
-    <dt class="portletHeader" tal:define="header view/get_header" tal:content="header">
+    <dt class="portletHeader"
+        tal:define="baseURL view/get_url | nothing">
+        <span class="portletTopLeft"></span>
+        <a class="tile"
+           tal:condition="baseURL"
+           tal:attributes="href view/get_url"
+           tal:content="view/get_header">portlet_header</a>
+        <span class="tile"
+           tal:condition="not: baseURL"
+           tal:content="view/get_header">portlet_header_without_baseURL</span>
+        <span class="portletTopRight"></span>
     </dt>
 
     <dd class="portletItem odd" tal:condition="view/termine" tal:define="portal_url here/portal_url" tal:repeat="termin view/termine">
