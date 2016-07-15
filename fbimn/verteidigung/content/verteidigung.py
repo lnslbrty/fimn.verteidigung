@@ -39,6 +39,7 @@ from Products.ATContentTypes.content.event import ATEvent, ATEventSchema #added
 from Products.Archetypes.atapi import TextAreaWidget
 #from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget #added
 from Products.validation.validators.ExpressionValidator import ExpressionValidator
+from Products.validation.validators.RegexValidator import RegexValidator
 from Products.CMFCore.utils import getToolByName
 
 #use fallback if 3rd party widget is not available
@@ -102,12 +103,14 @@ if True:
 		vocabulary = 'years_vocabulary',
 		enforceVocabulary = 0,
 		write_permission = ChangeEvents,
-		validators = ('isInt',
-					ExpressionValidator('python: len(value) == 4',
-						'Bitte eine vierstellige Jahreszahl eingeben!'),
-					ExpressionValidator('python: value > 1998',
-						'Jahreszahl ist unrealistisch!'),
-					),
+		validators = (
+                                ExpressionValidator('python: value.isdigit()',
+                                        'Bitte eine 4-stellige numerische Jahreszahl eingeben!'),
+				ExpressionValidator('python: len(value) == 4',
+					'Bitte eine vierstellige Jahreszahl eingeben!'),
+				ExpressionValidator('python: int(value) > 1998',
+					'Jahreszahl ist unrealistisch!'),
+				),
 		widget = atapi.StringWidget(
 			visible = {'edit': 'visible', 'view': 'invisible'},
 			size = 5,

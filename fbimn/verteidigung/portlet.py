@@ -11,6 +11,7 @@ from plone.memoize.instance import memoize
 from zope import schema
 from zope.formlib import form
 from zope.interface import implements
+from zope.component import getMultiAdapter
 from DateTime import DateTime
 import re
 
@@ -65,12 +66,13 @@ class Renderer(base.Renderer):
 
     @memoize
     def get_url(self):
+        portal_state = getMultiAdapter((self.context, self.request), name=u'plone_portal_state')
         url = self.data.baseURL
         if url is None or len(url) == 0:
             return None
         if url[0] != u'/':
             url = u'/' + url[0:]
-        return url
+        return portal_state.portal_url() + url
 
     def termine_available(self):
 	return self.termine_anzahl
