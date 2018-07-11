@@ -40,7 +40,6 @@ class VerteidigungEventsView(BrowserView):
         termine = []
         for brain in verteidigung_brains:
             obj = brain.getObject()
-            if obj.hasEventRestriction() and self.user_is_anon(): continue
             termin = dict()
             termin['topic'] = safe_unicode(obj.getTopic())
 
@@ -57,8 +56,6 @@ class VerteidigungEventsView(BrowserView):
                 degree = ''
 
             termin['title'] = degree + u' ' + safe_unicode(obj.getGraduateName())
-            if obj.hasEventRestriction():
-                termin['title'] += u' (Sperrvermerk)'
             termin['location'] = obj.getRoom()
             termin['event_url'] = brain.getURL()
             termine += [ termin ]

@@ -3,9 +3,6 @@ from zope.interface import Interface
 from plone.theme.interfaces import IDefaultPloneLayer
 
 class IVerteidigung(Interface):
-    def hasEventRestriction():
-        """ checks if the graduate event is restricted/private """
-
     def getTopic():
         """ get the graduation topic """
 

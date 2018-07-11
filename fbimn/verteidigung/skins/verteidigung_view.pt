@@ -45,9 +45,6 @@
                         <span tal:define="evtype here/getEventType" tal:content="evtype">
                         Categories
                         </span>
-                        <div tal:condition="here/getEventRestriction" style="color:red;">
-                            <b>(nicht &#246;ffentlich)</b>
-                        </div>
                     </td>
                 </tr>
 
