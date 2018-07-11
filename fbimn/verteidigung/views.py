@@ -9,6 +9,7 @@ from zope.formlib import form
 from zope.interface import implements, Interface
 from DateTime import DateTime
 from Products.CMFPlone.utils import safe_unicode
+from AccessControl import Unauthorized
 import re
 
 # Product imports
@@ -28,6 +29,9 @@ class VerteidigungEventsView(BrowserView):
 
     @memoize
     def getData(self):
+        if self.user_is_anon():
+            raise Unauthorized("Please login.")
+
         start = DateTime()
         end = start + 30
         date_range_query = {'query': (start, end), 'range': 'min:max'}
