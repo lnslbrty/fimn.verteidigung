@@ -43,7 +43,7 @@
       name="fbimn.verteidigung.Portlet"
       interface=".portlet.IVerteidigungsportlet"
       assignment=".portlet.Assignment"
-      view_permission="zope2.View"
+      view_permission="cmf.ModifyPortalContent"
       edit_permission="cmf.ManagePortal"
       renderer=".portlet.Renderer"
       addview=".portlet.AddForm"
@@ -57,7 +57,7 @@
         class=".views.VerteidigungEventsView"
         layer=".interfaces.IVerteidigungView"
         template="skins/verteidigung_listing.pt"
-        permission="zope2.View"
+        permission="cmf.ModifyPortalContent"
     />
 
     <browser:page
@@ -66,7 +66,7 @@
         class=".views.VerteidigungEventsView"
         layer=".interfaces.IVerteidigungView"
         template="skins/verteidigung_listing.pt"
-        permission="zope2.View"
+        permission="cmf.ModifyPortalContent"
     />
 
     <include package="plone.app.contentmenu"/>
