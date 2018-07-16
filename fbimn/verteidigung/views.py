@@ -10,6 +10,7 @@ from zope.interface import implements, Interface
 from DateTime import DateTime
 from Products.CMFPlone.utils import safe_unicode
 from AccessControl import Unauthorized
+
 import re
 
 # Product imports
@@ -25,23 +26,21 @@ class VerteidigungEventsView(BrowserView):
         self.request = request
 
     def user_is_anon(self):
-        return api.user.is_anonymous()
+       return api.user.is_anonymous()
 
     @memoize
     def getData(self):
-        if self.user_is_anon():
-            raise Unauthorized("Please login.")
-
         start = DateTime()
-        end = start + 30
-        date_range_query = {'query': (start, end), 'range': 'min:max'}
-        verteidigung_brains = self.context.portal_catalog.queryCatalog({"portal_type"  : "Verteidigung",
+        #end = start + 30
+        #date_range_query = {'query': (start, end), 'range': 'min:max'}
+        date_range_query = {'query': (start), 'range': 'min'}
+	verteidigung_brains = self.context.portal_catalog.queryCatalog({"portal_type"  : "Verteidigung",
                                                                         "start"        : date_range_query,
                                                                         "sort_on"      : "start",
                                                                         "sort_order"   : "ascending",
                                                                         "sort_limit"   : 10,
                                                                         "review_state" : "published"})
-        termine = []
+	termine = []
         for brain in verteidigung_brains:
             obj = brain.getObject()
             termin = dict()
@@ -65,4 +64,5 @@ class VerteidigungEventsView(BrowserView):
             termine += [ termin ]
 
         self.termine_anzahl = len(termine)
-        return termine
+	
+	return termine
