@@ -8,12 +8,15 @@
 
 <body>
 
-    <metal:content-core fill-slot="content-core">
-      <div id="newsListing">
+    <metal:content-core fill-slot="content-core"> 
+	<div id="newsListing" tal:define="local termine view/getData">
+          <p tal:condition="not: termine">
+               Keine zukünftigen Verteidigungen vorhanden.
+          </p>
           <div id="tileItem"
-               tal:condition="view/getData"
+               tal:condition="termine"
                tal:define="portal_url here/portal_url"
-               tal:repeat="termin view/getData">
+               tal:repeat="termin termine">
 
               <h2 class="tileHeadline">
                   <a class="summary url"
