@@ -57,16 +57,7 @@
         class=".views.VerteidigungEventsView"
         layer=".interfaces.IVerteidigungView"
         template="skins/verteidigung_listing.pt"
-        permission="cmf.ModifyPortalContent"
-    />
-
-    <browser:page
-        for="Products.ATContentTypes.interface.IATTopic"
-        name="verteidigung_listing"
-        class=".views.VerteidigungEventsView"
-        layer=".interfaces.IVerteidigungView"
-        template="skins/verteidigung_listing.pt"
-        permission="cmf.ModifyPortalContent"
+	permission="cmf.ModifyPortalContent"
     />
 
     <include package="plone.app.contentmenu"/>
