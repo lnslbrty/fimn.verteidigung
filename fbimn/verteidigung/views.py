@@ -43,8 +43,6 @@ class VerteidigungEventsView(BrowserView):
         termine = []
         for brain in verteidigung_brains:
             obj = brain.getObject()
-            if obj.getEffectiveDate() == None or obj.getExpirationDate() == None:
-                continue
 
             termin = dict()
             termin['topic'] = safe_unicode(obj.getTopic())
