@@ -6,5 +6,8 @@
           <role name="Owner"/>
           <role name="Contributor"/>
         </permission>
-    </permissions>
+        <permission name="fbimn.verteidigung: ViewVerteidigung" acquire="True">
+          <role name="Authenticated"/>
+        </permission>
+     </permissions>
 </rolemap>
