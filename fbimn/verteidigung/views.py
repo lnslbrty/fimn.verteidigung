@@ -30,19 +30,22 @@ class VerteidigungEventsView(BrowserView):
 
     @memoize
     def getData(self):
-        start = DateTime()
-        #end = start + 30
-        #date_range_query = {'query': (start, end), 'range': 'min:max'}
-        date_range_query = {'query': (start), 'range': 'min'}
-	verteidigung_brains = self.context.portal_catalog.queryCatalog({"portal_type"  : "Verteidigung",
-                                                                        "start"        : date_range_query,
+        currentDate = DateTime()
+        date_range_effective = {'query': currentDate, 'range': 'max'}
+        date_range_expiration = {'query': currentDate, 'range': 'min'}
+        verteidigung_brains = self.context.portal_catalog.queryCatalog({"portal_type"  : "Verteidigung",
+                                                                        "effective"        : date_range_effective,
+                                                                        "expiration"        : date_range_expiration,
                                                                         "sort_on"      : "start",
                                                                         "sort_order"   : "ascending",
                                                                         "sort_limit"   : 10,
                                                                         "review_state" : "published"})
-	termine = []
+        termine = []
         for brain in verteidigung_brains:
             obj = brain.getObject()
+            if obj.getEffectiveDate() == None or obj.getExpirationDate() == None:
+                continue
+
             termin = dict()
             termin['topic'] = safe_unicode(obj.getTopic())
 
@@ -64,5 +67,5 @@ class VerteidigungEventsView(BrowserView):
             termine += [ termin ]
 
         self.termine_anzahl = len(termine)
-	
-	return termine
+
+        return termine
