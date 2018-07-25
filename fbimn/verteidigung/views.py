@@ -39,7 +39,7 @@ class VerteidigungEventsView(BrowserView):
                                                                         "sort_on"      : "start",
                                                                         "sort_order"   : "ascending",
                                                                         "sort_limit"   : 10,
-                                                                        "review_state" : "published"})
+                                                                        "review_state" : ("internally_published", "published")})
         termine = []
         for brain in verteidigung_brains:
             obj = brain.getObject()
