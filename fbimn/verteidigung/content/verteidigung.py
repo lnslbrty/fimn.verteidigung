@@ -142,15 +142,6 @@ if True:
 			)
 		),
 
-	atapi.BooleanField('eventRestriction',
-			languageIndependent=True,
-			write_permission = ChangeEvents,
-			widget = atapi.BooleanWidget(
-				description = config.DESCR_RESTRICT,
-				label = config.LABEL_RESTRICT,
-			)
-		),
-
 	atapi.StringField('topic', 
 		searchable = True,
 		required = True,
@@ -395,24 +386,14 @@ class Verteidigung(ATEvent):
         """
         eventTypeValue = self.getField('eventType').get(self)
         graduateNameValue = self.getField('graduateName').get(self)
-        eventRestriction = self.getField('eventRestriction').get(self)
         newValue = ''
         if eventTypeValue:
             newValue = eventTypeValue[0] + ' ' + graduateNameValue
         if not newValue.strip():
             newValue = '[neuer Verteidigungstermin]'
-        if eventRestriction:
-            newValue = newValue + ' (Sperrvermerk)'
 
         ff = self.getField('title')
         ff.set(self, newValue, **kw) # set is ok
-
-    security.declareProtected(ChangeEvents, 'setEventRestriction')
-    def setEventRestriction(self, value, alreadySet=False, **kw):
-        f = self.getField('eventRestriction')
-        f.set(self, value, **kw) # set is ok
-        if not alreadySet:
-            self.setTitle('fromRestriction', alreadySet=True, **kw)
 
     security.declareProtected(ChangeEvents, 'setGraduateName')
     def setGraduateName(self, value, alreadySet=False, **kw):
@@ -460,11 +441,6 @@ class Verteidigung(ATEvent):
             self.setEventType(v, alreadySet=True, **kw)
 
     """ Methods implemented for Interface 'IVerteidigung' """
-    def hasEventRestriction(self):
-        eventRestriction = self.getField('eventRestriction').get(self)
-        if eventRestriction: return True
-        return False
-
     def getTopic(self):
         return str(self.getField('topic').get(self))
 

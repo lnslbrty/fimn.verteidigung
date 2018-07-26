@@ -95,15 +95,9 @@ class Renderer(base.Renderer):
         for brain in verteidigung_brains:
             if count <= 0: break
             obj = brain.getObject()
-            if obj.hasEventRestriction() and self.user_is_anon():
-                continue
 
             count -= 1
             termin = dict()
-            if obj.hasEventRestriction():
-                termin['restricted'] = 1
-            else:
-                termin['restricted'] = 0
             termin['topic'] = obj.getTopic()
 
             date = obj.getDate()

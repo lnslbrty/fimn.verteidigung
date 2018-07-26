@@ -14,6 +14,11 @@
 
    <!-- <include package=".browser" /> -->
 
+   <permission
+      id="fbimn.verteidigung.ViewVerteidigung"
+      title="fbimn.verteidigung: ViewVerteidigung"
+      />
+
    <cmf:registerDirectory
       name="skins"
       directory="skins"
@@ -43,7 +48,7 @@
       name="fbimn.verteidigung.Portlet"
       interface=".portlet.IVerteidigungsportlet"
       assignment=".portlet.Assignment"
-      view_permission="zope2.View"
+      view_permission="fbimn.verteidigung.ViewVerteidigung"
       edit_permission="cmf.ManagePortal"
       renderer=".portlet.Renderer"
       addview=".portlet.AddForm"
@@ -57,16 +62,7 @@
         class=".views.VerteidigungEventsView"
         layer=".interfaces.IVerteidigungView"
         template="skins/verteidigung_listing.pt"
-        permission="zope2.View"
-    />
-
-    <browser:page
-        for="Products.ATContentTypes.interface.IATTopic"
-        name="verteidigung_listing"
-        class=".views.VerteidigungEventsView"
-        layer=".interfaces.IVerteidigungView"
-        template="skins/verteidigung_listing.pt"
-        permission="zope2.View"
+	permission="fbimn.verteidigung.ViewVerteidigung"
     />
 
     <include package="plone.app.contentmenu"/>

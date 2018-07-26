@@ -130,9 +130,6 @@
 <td>
 <metal:fieldMacro use-macro="python:here.widget('eventType', mode='edit')" />
 </td>
-<td style="padding-left:8px;">
-<metal:fieldMacro use-macro="python:here.widget('eventRestriction', mode='edit')" />
-</td>
 </tr>
 </table>
 
